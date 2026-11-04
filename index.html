@@ -831,7 +831,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--coral-300);outline-
           </div>
         </div>
       </div>
-      <div class="hero-dots" id="heroDots"></div>
+      <div class="hero-dots" id="heroDots" role="group" aria-label="Escolha um destaque do simpósio"></div>
 
       <div class="countdown" id="countdown" aria-label="Contagem regressiva para o evento">
         <div class="cd-box"><div class="cd-num" id="cdDays">00</div><div class="cd-label">Dias</div></div>
@@ -1212,6 +1212,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--coral-300);outline-
           <li><a href="#sobre">Sobre o simpósio</a></li>
           <li><a href="#edicoes">Edições passadas</a></li>
           <li><a href="#eixos">Movimentos temáticos</a></li>
+          <li><a href="#organizadoras">Organizadoras</a></li>
           <!-- OCULTO TEMPORARIAMENTE: aguardando confirmação dos nomes dos palestrantes (serão 4). Remover style="display:none" para reativar. -->
       <li style="display:none"><a href="#palestrantes">Palestrantes</a></li>
           <li><a href="#programacao">Programação</a></li>
@@ -1368,7 +1369,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--coral-300);outline-
     heroSlideEls.forEach((_, i)=>{
       const dot = document.createElement('button');
       dot.className = 'hero-dot' + (i===0 ? ' is-active' : '');
-      dot.setAttribute('aria-label', 'Ir para o slide ' + (i+1));
+      const heroLabels = ['Sobre o simpósio', 'Nossa história', 'Palestrantes'];
+      dot.setAttribute('aria-label', 'Mostrar destaque: ' + (heroLabels[i] || 'destaque ' + (i + 1)));
+      dot.title = heroLabels[i] || 'Destaque ' + (i + 1);
       dot.addEventListener('click', ()=> goHero(i, true));
       heroDotsWrap.appendChild(dot);
     });
